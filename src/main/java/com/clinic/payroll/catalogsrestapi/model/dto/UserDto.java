@@ -1,66 +1,45 @@
 package com.clinic.payroll.catalogsrestapi.model.dto;
 
-public final class UserDto {
+public class UserDto {
 	
-	private final String login;
-	private final String password;
-	private final String name;
-	private final String email;
+	private String login;
 	
-	private UserDto(String login, String password, String name, String email) {
-		super();
-		this.login = login;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-	}
+	private String password;
+	
+	private String name;
+	
+	private String email;
 
 	public String getLogin() {
 		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		return result;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserDto other = (UserDto) obj;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "UserDto [login=" + login + ", password=" + password + ", name=" + name + ", email=" + email + "]";
-	}
-	
-	
 
 }

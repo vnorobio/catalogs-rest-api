@@ -19,14 +19,18 @@ public class CityEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotNull(message = "Description may not be null")
 	@Column
 	private String description;
 	
-	@NotNull
+	@NotNull(message = "Zone may not be null")
 	@OneToOne
 	@JoinColumn(name = "zone", referencedColumnName = "id")
 	private ZoneEntity zone;
+	
+	public CityEntity() {
+		super();
+	}
 	
 	public CityEntity(Long id, String description, ZoneEntity zone) {
 		super();

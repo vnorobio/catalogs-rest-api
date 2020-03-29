@@ -1,93 +1,62 @@
 package com.clinic.payroll.catalogsrestapi.model.dto;
 
-public final class ClinicDto {
+public class ClinicDto {
 	
-	private final Long id;
-	private final String name;
-	private final String administrator;
-	private final String email;
-	private final String director;
-	private final CityDto city;
-	private final int capacity;
-	private final ClinicTypeDto clinicType;
-	
-	private ClinicDto(Long id, String name, String administrator, String email, String director, CityDto city,
-			int capacity, ClinicTypeDto clinicType) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.administrator = administrator;
-		this.email = email;
-		this.director = director;
-		this.city = city;
-		this.capacity = capacity;
-		this.clinicType = clinicType;
-	}
-
+	private Long id;
+	private String name;
+	private String administrator;
+	private String email;
+	private String director;
+	private CityDto city;
+	private int capacity;
+	private ClinicTypeDto clinicType;
 	public Long getId() {
 		return id;
 	}
-
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
-
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getAdministrator() {
 		return administrator;
 	}
-
+	public void setAdministrator(String administrator) {
+		this.administrator = administrator;
+	}
 	public String getEmail() {
 		return email;
 	}
-
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getDirector() {
 		return director;
 	}
-
+	public void setDirector(String director) {
+		this.director = director;
+	}
 	public CityDto getCity() {
 		return city;
 	}
-
+	public void setCity(CityDto city) {
+		this.city = city;
+	}
 	public int getCapacity() {
 		return capacity;
 	}
-
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
 	public ClinicTypeDto getClinicType() {
 		return clinicType;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ClinicDto other = (ClinicDto) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ClinicDto [id=" + id + ", name=" + name + ", administrator=" + administrator + ", email=" + email
-				+ ", director=" + director + ", city=" + city + ", capacity=" + capacity + ", clinicType=" + clinicType
-				+ "]";
+	public void setClinicType(ClinicTypeDto clinicType) {
+		this.clinicType = clinicType;
 	}
 	
-	
-
 }
