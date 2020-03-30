@@ -15,24 +15,29 @@ public class ClinicTypeEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "clinic_type_id")
+	private Long clinicTypeId;
 	
 	@NotNull
 	@Column
 	private String description;
 	
-	public ClinicTypeEntity(Long id, String description) {
+	public ClinicTypeEntity() {
 		super();
-		this.id = id;
+	}	
+	
+	public ClinicTypeEntity(Long clinicTypeId, String description) {
+		super();
+		this.clinicTypeId = clinicTypeId;
 		this.description = description;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getClinicTypeId() {
+		return clinicTypeId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setClinicTypeId(Long clinicTypeId) {
+		this.clinicTypeId = clinicTypeId;
 	}
 
 	public String getDescription() {
@@ -47,7 +52,7 @@ public class ClinicTypeEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((clinicTypeId == null) ? 0 : clinicTypeId.hashCode());
 		return result;
 	}
 
@@ -60,17 +65,17 @@ public class ClinicTypeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		ClinicTypeEntity other = (ClinicTypeEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (clinicTypeId == null) {
+			if (other.clinicTypeId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!clinicTypeId.equals(other.clinicTypeId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ClinicTypeEntity [id=" + id + ", description=" + description + "]";
+		return "ClinicTypeEntity [id=" + clinicTypeId + ", description=" + description + "]";
 	}
 	
 	

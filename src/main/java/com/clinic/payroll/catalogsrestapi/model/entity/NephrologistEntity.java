@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,19 +17,21 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
 
 @Entity
-@Table(name = "nephrologis")
+@Table(name = "nephrologist")
 public class NephrologistEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "nephrologist_id")
+	private Long nephrologistId;
 	
 	@NotNull
 	@Column
 	private String name;
-	
-	@OneToOne
-	@JoinColumn(name = "nephrologist_type", referencedColumnName = "id")
+
+	@NotNull(message = "Zone may not be null")
+    @ManyToOne
+    @JoinColumn(name = "nephrologist_type", referencedColumnName = "nephrologist_type_id", insertable = false, updatable = false)
 	private NephrologistTypeEntity nephrologistType;
 	
 	@Column
@@ -37,24 +40,28 @@ public class NephrologistEntity {
 	@Column
 	private Boolean active;
 	
-	@OneToMany(mappedBy = "nephrologist")
+	@OneToMany(targetEntity = NephrologistBaseClinicEntity.class)
 	private Set<NephrologistBaseClinicEntity> baseClinics = new HashSet<>();
 	
-	private NephrologistEntity(Long id, String name, NephrologistTypeEntity nephrologistType, String email, Boolean active) {
+	private NephrologistEntity() {
 		super();
-		this.id = id;
+	}
+	
+	private NephrologistEntity(Long nephrologistId, String name, NephrologistTypeEntity nephrologistType, String email, Boolean active) {
+		super();
+		this.nephrologistId = nephrologistId;
 		this.name = name;
 		this.nephrologistType = nephrologistType;
 		this.email = email;
 		this.active = active;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getNephrologistId() {
+		return nephrologistId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setNephrologistId(Long id) {
+		this.nephrologistId = id;
 	}
 
 	public String getName() {
@@ -93,7 +100,7 @@ public class NephrologistEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nephrologistId == null) ? 0 : nephrologistId.hashCode());
 		return result;
 	}
 
@@ -106,17 +113,17 @@ public class NephrologistEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		NephrologistEntity other = (NephrologistEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (nephrologistId == null) {
+			if (other.nephrologistId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!nephrologistId.equals(other.nephrologistId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "NephrologistEntity [id=" + id + ", name=" + name + ", nephrologistType=" + nephrologistType + ", email="
+		return "NephrologistEntity [id=" + nephrologistId + ", name=" + name + ", nephrologistType=" + nephrologistType + ", email="
 				+ email + ", active=" + active + "]";
 	}
 	

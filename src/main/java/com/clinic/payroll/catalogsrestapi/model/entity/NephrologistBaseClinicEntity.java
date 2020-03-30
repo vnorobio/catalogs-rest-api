@@ -12,21 +12,22 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
 
 @Entity
-@Table(name = "base_clinics")
+@Table(name = "nephrologist_base_clinic")
 public class NephrologistBaseClinicEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "base_clinic_id")
+	private Long baseClinicId;
 	
 	@NotNull
     @ManyToOne
-    @JoinColumn(name = "nephrologist", referencedColumnName = "id")
+    @JoinColumn(name = "nephrologist", referencedColumnName = "nephrologist_id", insertable = false, updatable = false)
     NephrologistEntity nephrologist;
     
 	@NotNull
     @ManyToOne
-    @JoinColumn(name = "clinic", referencedColumnName = "id")
+    @JoinColumn(name = "clinic", referencedColumnName = "clinic_id", insertable = false, updatable = false)
     ClinicEntity clinic;
     
 	@NotNull
@@ -36,23 +37,27 @@ public class NephrologistBaseClinicEntity {
 	@NotNull
 	@Column(name = "dedication_hours")
 	private Double dedicationHours;
+
+	private NephrologistBaseClinicEntity() {
+		super();
+	}
 	
-	private NephrologistBaseClinicEntity(Long id, NephrologistEntity nephrologist, ClinicEntity clinic, Double salary,
+	private NephrologistBaseClinicEntity(Long baseClinicId, NephrologistEntity nephrologist, ClinicEntity clinic, Double salary,
 			Double dedicationHours) {
 		super();
-		this.id = id;
+		this.baseClinicId = baseClinicId;
 		this.nephrologist = nephrologist;
 		this.clinic = clinic;
 		this.salary = salary;
 		this.dedicationHours = dedicationHours;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getBaseClinicId() {
+		return baseClinicId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setBaseClinicId(Long id) {
+		this.baseClinicId = id;
 	}
 
 	public NephrologistEntity getNephrologist() {
@@ -91,7 +96,7 @@ public class NephrologistBaseClinicEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((baseClinicId == null) ? 0 : baseClinicId.hashCode());
 		return result;
 	}
 
@@ -104,17 +109,17 @@ public class NephrologistBaseClinicEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		NephrologistBaseClinicEntity other = (NephrologistBaseClinicEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (baseClinicId == null) {
+			if (other.baseClinicId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!baseClinicId.equals(other.baseClinicId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "NephrologistBaseClinicEntity [id=" + id + ", nephrologist=" + nephrologist + ", clinic=" + clinic
+		return "NephrologistBaseClinicEntity [id=" + baseClinicId + ", nephrologist=" + nephrologist + ", clinic=" + clinic
 				+ ", salary=" + salary + ", dedicationHours=" + dedicationHours + "]";
 	}
 	

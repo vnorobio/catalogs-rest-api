@@ -1,5 +1,8 @@
 package com.clinic.payroll.catalogsrestapi.model.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "zone")
@@ -15,24 +19,32 @@ public class ZoneEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "zone_id")
+	private Long zoneId;
 	
 	@NotNull
 	@Column
 	private String description;
+	/*
+	@OneToMany(targetEntity = ClinicEntity.class)
+	private Set<ClinicEntity> baseClinics = new HashSet<>();	*/
 	
-	public ZoneEntity(Long id, String description) {
+	public ZoneEntity(Long zoneId, String description) {
 		super();
-		this.id = id;
+		this.zoneId = zoneId;
 		this.description = description;
 	}
 
-	public Long getId() {
-		return id;
+	public ZoneEntity() {
+		super();
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(Long zoneId) {
+		this.zoneId = zoneId;
 	}
 
 	public String getDescription() {
@@ -47,7 +59,7 @@ public class ZoneEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((zoneId == null) ? 0 : zoneId.hashCode());
 		return result;
 	}
 
@@ -60,17 +72,17 @@ public class ZoneEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		ZoneEntity other = (ZoneEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (zoneId == null) {
+			if (other.zoneId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!zoneId.equals(other.zoneId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ZoneEntity [id=" + id + ", description=" + description + "]";
+		return "ZoneEntity [id=" + zoneId + ", description=" + description + "]";
 	}
 	
 	

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,7 +22,8 @@ public class ClinicEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "clinic_id")
+	private Long clinicId;
 	
 	@NotNull
 	@Column
@@ -36,24 +38,31 @@ public class ClinicEntity {
 	@Column
 	private String director;
 	
-    @OneToOne
-    @JoinColumn(name = "city", referencedColumnName = "id")
+	@NotNull(message = "Zone may not be null")
+    @ManyToOne
+    @JoinColumn(name = "city", referencedColumnName = "city_id", insertable = false, updatable = false)
 	private CityEntity city;
     
 	@Column
 	private int capacity;
 	
-	@OneToOne
-	@JoinColumn(name = "clinic_type", referencedColumnName = "id")
+	@NotNull(message = "Zone may not be null")
+    @ManyToOne
+    @JoinColumn(name = "clinic_type", referencedColumnName = "clinic_type_id", insertable = false, updatable = false)
 	private ClinicTypeEntity clinicType;
 	
-	@OneToMany(mappedBy = "clinic")
+	@OneToMany(targetEntity = NephrologistBaseClinicEntity.class)
 	private Set<NephrologistBaseClinicEntity> baseClinics = new HashSet<>();	
 	
-	private ClinicEntity(Long id, String name, String administrator, String email, String director, CityEntity city,
+	private ClinicEntity() {
+		super();
+
+	}	
+	
+	private ClinicEntity(Long clinicId, String name, String administrator, String email, String director, CityEntity city,
 			int capacity, ClinicTypeEntity clinicType) {
 		super();
-		this.id = id;
+		this.clinicId = clinicId;
 		this.name = name;
 		this.administrator = administrator;
 		this.email = email;
@@ -63,12 +72,12 @@ public class ClinicEntity {
 		this.clinicType = clinicType;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getClinicId() {
+		return clinicId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setClinicId(Long id) {
+		this.clinicId = id;
 	}
 
 	public String getName() {
@@ -131,7 +140,7 @@ public class ClinicEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((clinicId == null) ? 0 : clinicId.hashCode());
 		return result;
 	}
 
@@ -144,17 +153,17 @@ public class ClinicEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		ClinicEntity other = (ClinicEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (clinicId == null) {
+			if (other.clinicId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!clinicId.equals(other.clinicId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ClinicEntity [id=" + id + ", name=" + name + ", administrator=" + administrator + ", email=" + email
+		return "ClinicEntity [id=" + clinicId + ", name=" + name + ", administrator=" + administrator + ", email=" + email
 				+ ", director=" + director + ", city=" + city + ", capacity=" + capacity + ", clinicType=" + clinicType
 				+ "]";
 	}

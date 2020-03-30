@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -17,34 +18,35 @@ public class CityEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "city_id")
+	private Long cityId;
 	
 	@NotNull(message = "Description may not be null")
 	@Column
 	private String description;
 	
 	@NotNull(message = "Zone may not be null")
-	@OneToOne
-	@JoinColumn(name = "zone", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "zone", referencedColumnName = "zone_id", insertable = false, updatable = false)
 	private ZoneEntity zone;
 	
 	public CityEntity() {
 		super();
 	}
 	
-	public CityEntity(Long id, String description, ZoneEntity zone) {
+	public CityEntity(Long cityId, String description, ZoneEntity zone) {
 		super();
-		this.id = id;
+		this.cityId = cityId;
 		this.description = description;
 		this.zone = zone;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getCityId() {
+		return cityId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCityId(Long id) {
+		this.cityId = id;
 	}
 
 	public String getDescription() {
@@ -67,7 +69,7 @@ public class CityEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((cityId == null) ? 0 : cityId.hashCode());
 		return result;
 	}
 
@@ -80,17 +82,17 @@ public class CityEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		CityEntity other = (CityEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (cityId == null) {
+			if (other.cityId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!cityId.equals(other.cityId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "CityEntity [id=" + id + ", description=" + description + ", zone=" + zone + "]";
+		return "CityEntity [id=" + cityId + ", description=" + description + ", zone=" + zone + "]";
 	}
 
 
