@@ -1,6 +1,5 @@
 package com.clinic.payroll.catalogsrestapi.cotroller;
 
-import java.util.HashMap;
 
 import javax.validation.Valid;
 
@@ -17,9 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.clinic.payroll.catalogsrestapi.model.converter.DtoToEntity;
 import com.clinic.payroll.catalogsrestapi.model.converter.EntityToDto;
-import com.clinic.payroll.catalogsrestapi.model.dto.CityDto;
+import com.clinic.payroll.catalogsrestapi.model.dto.MessageResponseDto;
 import com.clinic.payroll.catalogsrestapi.model.dto.UserDto;
-import com.clinic.payroll.catalogsrestapi.model.entity.CityEntity;
 import com.clinic.payroll.catalogsrestapi.model.entity.UserEntity;
 import com.clinic.payroll.catalogsrestapi.repository.UserRepository;
 
@@ -52,17 +50,17 @@ public class AuthController {
 		if (userRepository.findByLogin(paramEntity.getLogin()).isPresent()) {
 			return ResponseEntity
 					.badRequest()
-					.body(new HashMap<String, String>().put("message", "Error: Username is already taken!"));
+					.body(new MessageResponseDto("Error: Login is already taken!"));
 		}
 
 		if (userRepository.existsByEmail(paramEntity.getEmail())) {
 			return ResponseEntity
 					.badRequest()
-					.body(new HashMap<String, String>().put("message", "Error: Email is already in use!"));
+					.body(new MessageResponseDto( "Error: Email is already in use!"));
 		}
 
 		userRepository.save(paramEntity);
 		
-		return ResponseEntity.ok(new HashMap<String, String>().put("message", "User registered successfully!"));
+		return ResponseEntity.ok(new MessageResponseDto("User registered successfully!"));
 	}
 }
