@@ -2,6 +2,8 @@ package com.clinic.payroll.catalogsrestapi.model.dto;
 
 public class UserDto {
 	
+	private Long userId;
+	
 	private String login;
 	
 	private String password;
@@ -9,6 +11,14 @@ public class UserDto {
 	private String name;
 	
 	private String email;
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 	public String getLogin() {
 		return login;
