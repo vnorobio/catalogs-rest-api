@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clinic.payroll.catalogsrestapi.model.converter.DtoToEntity;
-import com.clinic.payroll.catalogsrestapi.model.converter.EntityToDto;
 import com.clinic.payroll.catalogsrestapi.model.dto.MessageResponseDto;
 import com.clinic.payroll.catalogsrestapi.model.dto.UserDto;
 import com.clinic.payroll.catalogsrestapi.model.entity.UserEntity;
@@ -32,9 +31,6 @@ public class AuthController {
 
 	@Autowired
 	PasswordEncoder encoder;
-
-	@Autowired
-	private EntityToDto<UserEntity, UserDto> entityConverter;
 
 	@Autowired
 	private DtoToEntity<UserDto, UserEntity> dtoConverter;

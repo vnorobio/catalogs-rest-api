@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clinic.payroll.catalogsrestapi.exception.ResourceNotFoundException;
@@ -41,12 +43,14 @@ public class ZoneController {
 	private DtoToEntity<ZoneDto, ZoneEntity> dtoConverter;
 
 	@GetMapping("zones")
+	@ResponseStatus(code = HttpStatus.OK)
 	public List<ZoneDto> findAll() {
 		return zoneService.findAll().stream().map(entity -> entityConverter.entityToDto(entity, modelMapper))
 				.collect(Collectors.toList());
 	}
 
 	@GetMapping("zones/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
 	public ZoneDto findById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
 
 		ZoneEntity entity = zoneService.findById(id)
@@ -56,6 +60,7 @@ public class ZoneController {
 	}
 
 	@PostMapping("zones")
+	@ResponseStatus(code = HttpStatus.CREATED)
 	public ZoneDto createZone(@RequestBody ZoneDto dto) {
 
 		ZoneEntity paramEntity = dtoConverter.dtoToEntity(dto, modelMapper);
@@ -64,6 +69,7 @@ public class ZoneController {
 	}
 
 	@PutMapping("zones/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
 	public ZoneDto update(@PathVariable(value = "id") Long id, @Valid @RequestBody ZoneDto dto) throws ResourceNotFoundException {
 
 		ZoneEntity entity = dtoConverter.dtoToEntity(dto, modelMapper);
@@ -78,6 +84,7 @@ public class ZoneController {
 	}
 
 	@DeleteMapping("zones/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public Map<String, Boolean> delete(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
 		
 		ZoneEntity paramEntity = zoneService.findById(id)

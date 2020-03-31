@@ -2,16 +2,16 @@ package com.clinic.payroll.catalogsrestapi.model.dto;
 
 public class ClinicTypeDto {
 	
-	private Long id;
+	private Long clinicTypId;
 	
 	private String description;
 
-	public Long getId() {
-		return id;
+	public Long getClinicTypId() {
+		return clinicTypId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setClinicTypId(Long clinicTypId) {
+		this.clinicTypId = clinicTypId;
 	}
 
 	public String getDescription() {
@@ -21,5 +21,6 @@ public class ClinicTypeDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+
 }
