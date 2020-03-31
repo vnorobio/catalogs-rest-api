@@ -29,6 +29,7 @@ public class UserEntity {
 	@Column
 	private String name;
 
+	@NotNull
 	@Column(unique = true)
 	private String email;
 	
@@ -97,7 +98,9 @@ public class UserEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -110,18 +113,29 @@ public class UserEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		UserEntity other = (UserEntity) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (email.equals(other.email))
+			return true;
 		if (login == null) {
 			if (other.login != null)
 				return false;
-		} else if (!login.equals(other.login))
+		} else if (login.equals(other.login))
+			return true;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", login=" + login + ", password=" + password + ", name=" + name + ", email="
-				+ email + "]";
+		return "UserEntity [userId=" + userId + ", login=" + login + ", password=" + password + ", name=" + name
+				+ ", email=" + email + "]";
 	}
+
 
 }

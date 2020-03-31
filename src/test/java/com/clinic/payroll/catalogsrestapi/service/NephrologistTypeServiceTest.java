@@ -15,37 +15,33 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.clinic.payroll.catalogsrestapi.model.entity.CityEntity;
-import com.clinic.payroll.catalogsrestapi.model.entity.ZoneEntity;
-import com.clinic.payroll.catalogsrestapi.repository.CityRepository;
+import com.clinic.payroll.catalogsrestapi.model.entity.NephrologistTypeEntity;
+import com.clinic.payroll.catalogsrestapi.repository.NephrologistTypeRepository;
 
 @SpringBootTest
-public class CityServiceTest {
+public class NephrologistTypeServiceTest {
 
 	@InjectMocks
-	private CityService service = new CityServiceImpl();
+	private NephrologistTypeService service = new NephrologistTypeServiceImpl();
 
 	@Mock
-	private CityRepository repository;
-	
-	@Mock
-	private ZoneEntity zone;
+	private NephrologistTypeRepository repository;
 
-	@DisplayName("CityServiceTest - Test findAll method")
+	@DisplayName("NephrologistTypeServiceTest - Test findAll method")
 	@Test
 	void findAllTest() {
 
 		// given
-		List<CityEntity> expectedEntities = new ArrayList<CityEntity> ();
+		List<NephrologistTypeEntity> expectedEntities = new ArrayList<NephrologistTypeEntity> ();
 
-		expectedEntities.add(new CityEntity(1L, "Primera", zone));
-		expectedEntities.add(new CityEntity(2L, "Segunda", zone));
-		expectedEntities.add(new CityEntity(3L, "Tercera", zone));
+		expectedEntities.add(new NephrologistTypeEntity(1L, "Primera"));
+		expectedEntities.add(new NephrologistTypeEntity(2L, "Segunda"));
+		expectedEntities.add(new NephrologistTypeEntity(3L, "Tercera"));
 
 		doReturn(expectedEntities).when(repository).findAll();
 
 		// when
-		List<CityEntity> actualEntities = service.findAll();
+		List<NephrologistTypeEntity> actualEntities = service.findAll();
 
 		// then
 		assertThat(actualEntities).isEqualTo(expectedEntities);
@@ -53,36 +49,35 @@ public class CityServiceTest {
 	}
 
 	
-	@DisplayName("CityServiceTest - Test findById method")
+	@DisplayName("NephrologistTypeServiceTest - Test findById method")
 	@Test
 	void findByIdTest() {
 		// given
-		ZoneEntity zone = new ZoneEntity(1L, "Zona centro");
+		
 		final Long id = 2L;
-		CityEntity entity = new CityEntity(2L, "Segunda", zone);
-		final Optional<CityEntity> expectedEntity = Optional.of(entity);
+		NephrologistTypeEntity entity = new NephrologistTypeEntity(2L, "Segunda");
+		final Optional<NephrologistTypeEntity> expectedEntity = Optional.of(entity);
 
 		doReturn(Optional.of(entity)).when(repository).findById(id);
 		
 		// when
-		final Optional<CityEntity> actualdEntity = service.findById(id);
+		final Optional<NephrologistTypeEntity> actualdEntity = service.findById(id);
 
 		// then
 		assertThat(actualdEntity).isEqualTo(expectedEntity);
 
 	}
 	
-	@DisplayName("CityServiceTest - Test update method")
+	@DisplayName("NephrologistTypeServiceTest - Test update method")
 	@Test
 	void updateTest() {
 		// given
-		ZoneEntity zone = new ZoneEntity(1L, "Zona centro");
-		CityEntity entity = new CityEntity(2L, "Segunda", zone);
+		NephrologistTypeEntity entity = new NephrologistTypeEntity(2L, "Segunda");
 
 		doReturn(entity).when(repository).save(entity);
 		
 		// when
-		final CityEntity actualdEntity = service.saveOrUpdate(entity);
+		final NephrologistTypeEntity actualdEntity = service.saveOrUpdate(entity);
 
 		// then
 		
@@ -92,7 +87,7 @@ public class CityServiceTest {
 	}	
 	
 
-	@DisplayName("CityServiceTest - Test delete method")
+	@DisplayName("NephrologistTypeServiceTest - Test delete method")
 	@Test
 	void deleteTest() {
 		// given
@@ -110,4 +105,3 @@ public class CityServiceTest {
 	}
 	
 }
-

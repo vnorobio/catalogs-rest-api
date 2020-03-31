@@ -52,12 +52,12 @@ public class ClinicEntity {
 	@OneToMany(targetEntity = NephrologistBaseClinicEntity.class)
 	private Set<NephrologistBaseClinicEntity> baseClinics = new HashSet<>();	
 	
-	private ClinicEntity() {
+	public ClinicEntity() {
 		super();
 
 	}	
 	
-	private ClinicEntity(Long clinicId, String name, String administrator, String email, String director, CityEntity city,
+	public ClinicEntity(Long clinicId, String name, String administrator, String email, String director, CityEntity city,
 			int capacity, ClinicTypeEntity clinicType) {
 		super();
 		this.clinicId = clinicId;

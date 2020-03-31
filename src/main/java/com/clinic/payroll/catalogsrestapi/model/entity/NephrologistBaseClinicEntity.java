@@ -38,11 +38,11 @@ public class NephrologistBaseClinicEntity {
 	@Column(name = "dedication_hours")
 	private Double dedicationHours;
 
-	private NephrologistBaseClinicEntity() {
+	public NephrologistBaseClinicEntity() {
 		super();
 	}
 	
-	private NephrologistBaseClinicEntity(Long baseClinicId, NephrologistEntity nephrologist, ClinicEntity clinic, Double salary,
+	public NephrologistBaseClinicEntity(Long baseClinicId, NephrologistEntity nephrologist, ClinicEntity clinic, Double salary,
 			Double dedicationHours) {
 		super();
 		this.baseClinicId = baseClinicId;

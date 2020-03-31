@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
 
 @Entity
@@ -17,6 +17,7 @@ public class NephrologistTypeEntity {
 	@Column(name = "nephrologist_type_id")
 	private Long nephrologistTypeId;
 	
+	@NotNull(message = "Description may not be null")
 	@Column
 	private String description;
 	

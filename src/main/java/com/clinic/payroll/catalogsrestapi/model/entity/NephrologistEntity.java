@@ -41,11 +41,11 @@ public class NephrologistEntity {
 	@OneToMany(targetEntity = NephrologistBaseClinicEntity.class)
 	private Set<NephrologistBaseClinicEntity> baseClinics = new HashSet<>();
 	
-	private NephrologistEntity() {
+	public NephrologistEntity() {
 		super();
 	}
 	
-	private NephrologistEntity(Long nephrologistId, String name, NephrologistTypeEntity nephrologistType, String email, Boolean active) {
+	public NephrologistEntity(Long nephrologistId, String name, NephrologistTypeEntity nephrologistType, String email, Boolean active) {
 		super();
 		this.nephrologistId = nephrologistId;
 		this.name = name;
